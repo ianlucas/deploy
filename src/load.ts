@@ -5,6 +5,7 @@
 
 import { z } from "zod";
 import { cwd } from "./process.js";
+import { $ } from "zx";
 
 export async function load() {
     return z
@@ -12,7 +13,8 @@ export async function load() {
             ssh: z.object({
                 host: z.string(),
                 username: z.string(),
-                password: z.string()
+                password: z.string().optional(),
+                privateKey: z.string().optional()
             }),
             apps: z
                 .array(
@@ -24,7 +26,17 @@ export async function load() {
                     })
                 )
                 .min(1),
-            beforeZip: z.function().optional()
+            beforeZip: z
+                .function(
+                    z.tuple([
+                        z.object({
+                            $: z.custom<typeof $>(),
+                            name: z.string()
+                        })
+                    ]),
+                    z.any()
+                )
+                .optional()
         })
         .parse((await import(`file://${cwd}/deploy.js`)).default);
 }

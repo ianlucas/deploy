@@ -13,8 +13,8 @@ async function main() {
     const config = await load();
     let [name] = args._;
 
-    if (!config.ssh.host || !config.ssh.username || !config.ssh.password) {
-        console.log("make sure to add host, username, and password to deploy.json");
+    if (!config.ssh.host || !config.ssh.username || (!config.ssh.password && !config.ssh.privateKey)) {
+        console.log("make sure to add host, username and password to deploy.js");
         process.exit(1);
     }
 
