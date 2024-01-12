@@ -9,12 +9,14 @@ import type { DeployApp, DeployConfig } from "./load.js";
 import { args } from "./process.js";
 import { zip } from "./zip.js";
 
-export async function deploy(config: DeployConfig, app: DeployApp, backupFileName?: string) {
+export async function deploy(config: DeployConfig, app: DeployApp) {
     const { name } = app;
     const deployPath = `/opt/${name}-deploying`;
     const appPath = `/opt/${name}`;
 
-    const { zipFileName, zipFile } = await (backupFileName !== undefined ? backup(backupFileName) : zip(config, app));
+    const { zipFileName, zipFile } = await (args["--backup"] !== undefined
+        ? backup(args["--backup"])
+        : zip(config, app));
 
     if (args["--debug"]) {
         console.log({
@@ -57,7 +59,7 @@ export async function deploy(config: DeployConfig, app: DeployApp, backupFileNam
         });
         console.log("migrated database schema");
 
-        if (!args["--noprocess"]) {
+        if (!args["--no-pm2"]) {
             await ssh.execCommand(`pm2 stop ${name}`);
             console.log("stopped the server");
         }
@@ -68,7 +70,7 @@ export async function deploy(config: DeployConfig, app: DeployApp, backupFileNam
         await ssh.execCommand(`mv ${deployPath} ${appPath}`);
         console.log("moved new server data");
 
-        if (!args["--noprocess"]) {
+        if (!args["--no-pm2"]) {
             await ssh.execCommand(`pm2 start ${name}`);
             console.log("started the server");
         }

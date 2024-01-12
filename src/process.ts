@@ -7,11 +7,10 @@ import arg from "arg";
 
 export const args = arg({
     "--backup": String,
-    "--noprocess": Boolean,
+    "--no-pm2": Boolean,
     "--debug": Boolean,
 
-    "-b": "--backup",
-    "-n": "--noprocess"
+    "-b": "--backup"
 });
 
 export const cwd = process.cwd();

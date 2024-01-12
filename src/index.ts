@@ -27,7 +27,8 @@ async function main() {
 
     if (name === "all") {
         if (args["--backup"] !== undefined) {
-            console.log("backup file name is ignored when deploying all apps");
+            console.log("cannot backup all apps");
+            process.exit(1);
         }
         for (const app of config.apps) {
             await deploy(config, app);
@@ -38,7 +39,7 @@ async function main() {
             console.log(`app ${name} not found`);
             process.exit(1);
         }
-        await deploy(config, app, args["--backup"]);
+        await deploy(config, app);
     }
 }
 
