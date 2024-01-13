@@ -34,7 +34,7 @@ export async function deploy(config: DeployConfig, app: DeployApp) {
         const externalZipFile = `/home/${zipFileName}`;
         const deployPathCwd = { cwd: deployPath };
 
-        $.putFile(zipFile, externalZipFile);
+        await $.putFile(zipFile, externalZipFile);
         console.log("uploaded deploy file");
 
         await $(`mkdir -p ${deployPath}`);
