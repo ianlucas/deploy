@@ -5,7 +5,7 @@
 
 import { existsSync } from "fs";
 import { resolve } from "path";
-import { cwd } from "./process";
+import { cwd } from "./process.js";
 
 export async function backup(zipFileName: string) {
     const zipFile = resolve(cwd, "deploys", zipFileName);

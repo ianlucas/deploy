@@ -8,7 +8,7 @@ import { existsSync } from "fs";
 import { resolve } from "path";
 import { $ } from "zx";
 import { Env } from "./env.js";
-import type { DeployApp, DeployConfig } from "./load";
+import type { DeployApp, DeployConfig } from "./load.js";
 import { cwd } from "./process.js";
 
 export async function zip({ beforeZip, defaults, merges }: DeployConfig, { name, ...app }: DeployApp) {
