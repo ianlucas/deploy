@@ -16,13 +16,24 @@ export async function load() {
                 password: z.string().optional(),
                 privateKey: z.string().optional()
             }),
+            defaults: z
+                .object({
+                    folders: z.array(z.string()).optional(),
+                    files: z.array(z.string()).optional()
+                })
+                .optional(),
+            merges: z
+                .object({
+                    env: z.record(z.string().or(z.number())).optional()
+                })
+                .optional(),
             apps: z
                 .array(
                     z.object({
                         name: z.string(),
-                        folders: z.array(z.string()),
-                        files: z.array(z.string()),
-                        env: z.record(z.string().or(z.number()))
+                        folders: z.array(z.string()).optional(),
+                        files: z.array(z.string()).optional(),
+                        env: z.record(z.string().or(z.number())).optional()
                     })
                 )
                 .min(1),
