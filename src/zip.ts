@@ -23,8 +23,8 @@ export async function zip({ beforeZip, defaults, merges }: DeployConfig, { name,
     const zipFileName = `${name}-${timestamp}.zip`;
     const deploysPath = resolve(cwd, "deploys");
     const zipFile = resolve(deploysPath, zipFileName);
-    const folders = app.files || defaults?.files;
-    const files = app.folders || defaults?.folders;
+    const files = app.files || defaults?.files;
+    const folders = app.folders || defaults?.folders;
     const env = { ...(merges?.env || {}), ...(app.env || {}) };
 
     if (folders === undefined && files === undefined) {
