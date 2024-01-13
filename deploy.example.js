@@ -1,8 +1,20 @@
+/** @type {import('./src/index').DeployConfig} */
 export default {
     ssh: {
         host: "192.168.0.1",
         username: "yo user",
         password: "yo pass"
+    },
+
+    defaults: {
+        folders: ["build", "prisma", "public"],
+        files: ["package.json", "package-lock.json"]
+    },
+
+    merges: {
+        env: {
+            COMMON_ENV_VAR_1: 1
+        }
     },
 
     apps: [
@@ -14,6 +26,9 @@ export default {
                 MY_ENV_VAR_1: 1,
                 MY_ENV_VAR_2: "hello"
             }
+        },
+        {
+            name: "my-other-app"
         }
     ],
 
