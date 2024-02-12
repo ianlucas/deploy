@@ -66,6 +66,10 @@ export async function deploy(config: DeployConfig, app: DeployApp) {
             console.log("started the server");
         }
 
+        if (config.afterDeploy !== undefined) {
+            await config.afterDeploy({ $, name });
+        }
+
         console.log("deployment complete");
         process.exit(0);
     } catch (error) {

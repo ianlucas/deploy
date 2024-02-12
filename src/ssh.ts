@@ -5,7 +5,7 @@
 
 import { NodeSSH, SSHExecCommandResponse } from "node-ssh";
 
-interface SSHFunction {
+export interface SSHFunction {
     (command: string, config?: { cwd?: string }): Promise<SSHExecCommandResponse>;
     putFile: (localFile: string, remoteFile: string) => Promise<void>;
 }

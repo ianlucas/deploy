@@ -5,7 +5,8 @@
 
 import { z } from "zod";
 import { cwd } from "./process.js";
-import { $ } from "zx";
+import type { $ } from "zx";
+import type { SSHFunction } from "./ssh.js";
 
 export async function load() {
     return z
@@ -42,6 +43,18 @@ export async function load() {
                     z.tuple([
                         z.object({
                             $: z.custom<typeof $>(),
+                            name: z.string()
+                        })
+                    ]),
+                    z.any()
+                )
+                .optional(),
+
+            afterDeploy: z
+                .function(
+                    z.tuple([
+                        z.object({
+                            $: z.custom<SSHFunction>(),
                             name: z.string()
                         })
                     ]),
