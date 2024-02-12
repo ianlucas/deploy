@@ -35,5 +35,9 @@ export default {
     beforeZip({ name, $ }) {
         $`npm run switch ${name}`;
         $`npm run build`;
+    },
+
+    async afterDeploy({ $, deployPathCwd }) {
+        await $(`npm run script scripts/example.ts`, deployPathCwd);
     }
 };
