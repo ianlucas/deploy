@@ -61,13 +61,13 @@ export async function deploy(config: DeployConfig, app: DeployApp) {
         await $(`mv ${deployPath} ${appPath}`);
         console.log("moved new server data");
 
+        if (config.afterDeploy !== undefined) {
+            await config.afterDeploy({ $, name, deployPathCwd });
+        }
+
         if (!args["--no-pm2"]) {
             await $(`pm2 start ${name}`);
             console.log("started the server");
-        }
-
-        if (config.afterDeploy !== undefined) {
-            await config.afterDeploy({ $, name, deployPathCwd });
         }
 
         console.log("deployment complete");
