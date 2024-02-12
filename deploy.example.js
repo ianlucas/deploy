@@ -1,3 +1,4 @@
+// @ts-check
 /** @type {import('./src/index').DeployConfig} */
 export default {
     ssh: {
