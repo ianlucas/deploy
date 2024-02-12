@@ -55,7 +55,10 @@ export async function load() {
                     z.tuple([
                         z.object({
                             $: z.custom<SSHFunction>(),
-                            name: z.string()
+                            name: z.string(),
+                            deployPathCwd: z.object({
+                                cwd: z.string()
+                            })
                         })
                     ]),
                     z.any()

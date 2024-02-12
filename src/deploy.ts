@@ -67,7 +67,7 @@ export async function deploy(config: DeployConfig, app: DeployApp) {
         }
 
         if (config.afterDeploy !== undefined) {
-            await config.afterDeploy({ $, name });
+            await config.afterDeploy({ $, name, deployPathCwd });
         }
 
         console.log("deployment complete");
