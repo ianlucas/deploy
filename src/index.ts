@@ -41,6 +41,8 @@ async function main() {
         }
         await deploy(config, app);
     }
+
+    process.exit(0);
 }
 
 main();
