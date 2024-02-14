@@ -71,7 +71,6 @@ export async function deploy(config: DeployConfig, app: DeployApp) {
         }
 
         console.log("deployment complete");
-        process.exit(0);
     } catch (error) {
         console.log(error);
         process.exit(1);
