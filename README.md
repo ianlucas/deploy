@@ -1,6 +1,6 @@
 # deploy
 
-> My simple deployment script.
+> My simple deployment script
 
 ## Usage
 
