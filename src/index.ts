@@ -23,9 +23,11 @@ async function main() {
         process.exit(1);
     }
 
-    name = name !== undefined ? name : config.apps[0].name;
-
-    if (name === "all") {
+    if (args["--all"]) {
+        if (name !== undefined) {
+            console.log("cannot specify app name with --all");
+            process.exit(1);
+        }
         if (args["--backup"] !== undefined) {
             console.log("cannot backup all apps");
             process.exit(1);
@@ -34,6 +36,7 @@ async function main() {
             await deploy(config, app);
         }
     } else {
+        name = name !== undefined ? name : config.apps[0].name;
         const app = config.apps.find((app) => app.name === name);
         if (!app) {
             console.log(`app ${name} not found`);

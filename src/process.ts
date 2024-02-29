@@ -9,7 +9,9 @@ export const args = arg({
     "--backup": String,
     "--no-pm2": Boolean,
     "--debug": Boolean,
+    "--all": Boolean,
 
+    "-a": "--all",
     "-b": "--backup"
 });
 

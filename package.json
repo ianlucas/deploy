@@ -1,6 +1,6 @@
 {
     "name": "@ianlucas/deploy",
-    "version": "1.0.1",
+    "version": "2.0.0",
     "description": "My simple deployment script",
     "license": "MIT",
     "author": "Ian Lucas",
@@ -12,7 +12,7 @@
     },
     "scripts": {
         "format": "prettier . --write",
-        "prepack": "tsc"
+        "prepack": "([ -d dist ] && rm -rf dist); tsc"
     },
     "devDependencies": {
         "@types/adm-zip": "^0.5.5",
