@@ -7,6 +7,7 @@ import { z } from "zod";
 import { cwd } from "./process.js";
 import type { $ } from "zx";
 import type { SSHFunction } from "./ssh.js";
+import { readFileSync } from "fs";
 
 export async function load() {
     return z
@@ -15,7 +16,11 @@ export async function load() {
                 host: z.string(),
                 username: z.string(),
                 password: z.string().optional(),
-                privateKey: z.string().optional()
+                passphrase: z.string().optional(),
+                privateKey: z
+                    .string()
+                    .optional()
+                    .transform((path) => (path === undefined ? path : readFileSync(path, "utf-8")))
             }),
             defaults: z
                 .object({

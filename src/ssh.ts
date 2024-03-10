@@ -13,11 +13,13 @@ export interface SSHFunction {
 export async function ssh({
     host,
     password,
+    passphrase,
     privateKey,
     username
 }: {
     host: string;
     password?: string | undefined;
+    passphrase?: string | undefined;
     privateKey?: string | undefined;
     username: string;
 }): Promise<SSHFunction> {
@@ -26,6 +28,7 @@ export async function ssh({
     await ssh.connect({
         host,
         username,
+        passphrase,
         password,
         privateKey
     });
