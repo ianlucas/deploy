@@ -18,11 +18,6 @@ async function main() {
         process.exit(1);
     }
 
-    if (!name && config.apps.length > 1) {
-        console.log("please specify an app to deploy");
-        process.exit(1);
-    }
-
     if (args["--all"]) {
         if (name !== undefined) {
             console.log("cannot specify app name with --all");
@@ -36,6 +31,10 @@ async function main() {
             await deploy(config, app);
         }
     } else {
+        if (!name && config.apps.length > 1) {
+            console.log("please specify an app to deploy");
+            process.exit(1);
+        }
         name = name !== undefined ? name : config.apps[0].name;
         const app = config.apps.find((app) => app.name === name);
         if (!app) {
